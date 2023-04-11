@@ -3,6 +3,8 @@ exports.api = function(req, res) {
     res.write('{"resource":"Jerseys",');
     res.write(' "verbs":["GET", "PUT", "DELETE"] ');
     res.write('}');
-    res.write(']');
-    res.send();
+    res.write(']')
+    res.send()
 };
+
+module.exports = Jersey;
