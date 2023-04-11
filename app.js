@@ -25,27 +25,31 @@ var JerseyRouter = require('./routes/Jersey')
 var boardRouter = require('./routes/board')
 var selectorRouter = require('./routes/selector')
 var Jersey = require("./models/Jersey");
+var resourceRouter = require("./controllers/Jersey")
 
 async function recreateDB(){
   await Jersey.deleteMany();
 
   let instance1 = new
   Jersey({Jersey_type: "Liverpool", size: 'large', Jersey_number: 10});
-  instance1.save(function(err,doc){
+  instance1.save()
+    .then(function(err,doc){
     if(err) return console.error(err);
     console.log("First object saved")
   });
 
   let instance2 = new
   Jersey({Jersey_type:"Kansas City Chiefs", size: 'large', Jersey_number: 15});
-  instance2.save(function(err,doc){
+  instance2.save()
+    .then(function(err,doc){
     if(err) return console.error(err);
     console.log("Second object saved")
   });
 
   let instance3 = new
   Jersey({Jersey_type:"Memphis Grizzles", size:'large', Jersey_number: 12});
-  instance3.save(function(err,doc){
+  instance3.save()
+    .then(function(err,doc){
     if(err) return console.error(err);
     console.log("Third object saved")
   });
@@ -71,6 +75,7 @@ app.use('/users', usersRouter);
 app.use('/Jersey', JerseyRouter)
 app.use('/board', boardRouter)
 app.use('/selector', selectorRouter)
+app.use('/resource', resourceRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
