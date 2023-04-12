@@ -19,5 +19,3 @@ exports.Jersey_delete = function(req, res) {
 exports.Jersey_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: Jersey update PUT' + req.params.id);
 };
-
-module.exports = Jersey;
