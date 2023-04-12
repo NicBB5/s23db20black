@@ -30,3 +30,15 @@ exports.Jersey_list = async function(req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
+exports.Jersey_view_all_Page = async function(req, res) {
+    try {
+        console.log("hi")
+        theJersey = await Jersey.find();
+        res.render('Jersey', {title: 'Jersey Search Results', results:theJersey});
+    }
+    catch(err){
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};
