@@ -19,3 +19,14 @@ exports.Jersey_delete = function(req, res) {
 exports.Jersey_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: Jersey update PUT' + req.params.id);
 };
+
+exports.Jersey_list = async function(req, res) {
+    try {
+        theJersey = await Jersey.find();
+        res.send(theJersey);
+    }
+    catch(err){
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};

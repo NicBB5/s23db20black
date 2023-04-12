@@ -4,6 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var Jersey = require("./models/Jersey");
+
+var app = express();
+
+
+
 require('dotenv').config();
 const connectionString = 
 process.env.MONGO_CON
@@ -24,41 +30,8 @@ var usersRouter = require('./routes/users');
 var JerseyRouter = require('./routes/Jersey')
 var boardRouter = require('./routes/board')
 var selectorRouter = require('./routes/selector')
-var Jersey = require("./models/Jersey");
-var resourceRouter = require("./controllers/Jersey")
+var resourceRouter = require("./routes/resource")
 
-async function recreateDB(){
-  await Jersey.deleteMany();
-
-  let instance1 = new
-  Jersey({Jersey_type: "Liverpool", size: 'large', Jersey_number: 10});
-  instance1.save()
-    .then(function(err,doc){
-    if(err) return console.error(err);
-    console.log("First object saved")
-  });
-
-  let instance2 = new
-  Jersey({Jersey_type:"Kansas City Chiefs", size: 'large', Jersey_number: 15});
-  instance2.save()
-    .then(function(err,doc){
-    if(err) return console.error(err);
-    console.log("Second object saved")
-  });
-
-  let instance3 = new
-  Jersey({Jersey_type:"Memphis Grizzles", size:'large', Jersey_number: 12});
-  instance3.save()
-    .then(function(err,doc){
-    if(err) return console.error(err);
-    console.log("Third object saved")
-  });
-}
-
-let reseed = true;
-if (reseed) {recreateDB();}
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -76,6 +49,36 @@ app.use('/Jersey', JerseyRouter)
 app.use('/board', boardRouter)
 app.use('/selector', selectorRouter)
 app.use('/resource', resourceRouter)
+
+async function recreateDB(){
+  await Jersey.deleteMany();
+
+  let instance1 = new
+  Jersey({Jersey_type: "Liverpool", size: 'large', Jersey_number: 10});
+  instance1.save()
+    .then(doc=>{
+    console.log("First object saved")
+  }).catch(err=>console.error(err))
+
+  let instance2 = new
+  Jersey({Jersey_type:"Kansas City Chiefs", size: 'large', Jersey_number: 15});
+  instance2.save()
+    .then(doc=>{
+    console.log("Second object saved")
+  }).catch(err=>console.error(err));
+
+  let instance3 = new
+  Jersey({Jersey_type:"Memphis Grizzles", size:'large', Jersey_number: 12});
+  instance3.save()
+    .then(doc=>{
+    console.log("Third object saved")
+  }).catch(err=>console.error(err));
+}
+
+
+let reseed = true;
+if (reseed) {recreateDB();}
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
