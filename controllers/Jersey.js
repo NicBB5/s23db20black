@@ -42,3 +42,19 @@ exports.Jersey_view_all_Page = async function(req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
+exports.Jersey_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new Jersey();
+    document.Jersey_type = req.body.Jersey_type;
+    document.cost = req.body.cost;
+    document.size = req.body.size;
+    try {
+        let result = await document.save();
+        res.send(result);
+    }
+    catch(err){
+        res.status(500);
+        res.send(`{"error": ${err}}`);
+    }
+};
