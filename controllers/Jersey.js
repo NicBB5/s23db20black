@@ -47,7 +47,7 @@ exports.Jersey_create_post = async function(req, res) {
     console.log(req.body)
     let document = new Jersey();
     document.Jersey_type = req.body.Jersey_type;
-    document.cost = req.body.cost;
+    document.Jersey_number = req.body.Jersey_number;
     document.size = req.body.size;
     try {
         let result = await document.save();
