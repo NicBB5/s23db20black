@@ -7,5 +7,8 @@ var router = express.Router();
 //   res.render('Jersey', { title: 'Search Results Jersey' });
 // });
 
-router.get('/', Jersey_controllers.Jersey_view_all_Page);
+/* router.get('/', Jersey_controllers.Jersey_view_all_Page);
+module.exports = router; */
+
+router.get('/Jersey/:id', Jersey_controllers.Jersey_detail);
 module.exports = router;
