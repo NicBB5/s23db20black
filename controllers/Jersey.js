@@ -70,3 +70,20 @@ exports.Jersey_detail = async function(req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
+
+exports.Jersey_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body ${JSON.stringqify(req.body)}`)
+    try {
+        let toUpdate = await Jersey.findById(req.params.id)
+        if(req.body.Jersey_type)
+            toUpdate.Jersey_type = req.body.Jersey_type;
+        if(req.body.size) toUpdate.size = req.body.size;
+        if(req.body.Jersey_number) toUpdate.Jersey_number = req.body.Jersey_number;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
+    }
+};
