@@ -87,3 +87,15 @@ exports.Jersey_update_put = async function(req, res) {
         res.send(`{"error": ${err}: Update for id ${req.params.id} failed`);
     }
 };
+
+exports.Jersey_delete = async function(req, res) {
+    console.log("delete" + req.params.id)
+    try {
+        result = await Jersey.findByIdAndDelete(req.params.id)
+        console.log("Removed" + result)
+        res.send(result)
+    } catch(err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
+};
