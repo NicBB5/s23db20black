@@ -1,0 +1,22 @@
+extends layout 
+
+block content
+    h1 = title 
+
+    - let Jerseyid = toShow._id
+    - let Jersey_type = toShow.Jersey_type 
+    - let size = toShow.size 
+    - let Jersey_number = toShow.Jersey_number 
+    div
+        div.row
+            div(class='JerseyAttr mr-3') Jersey ID is: 
+            div #{Jerseyid}
+        div.row 
+            div(class='JerseyAttr mr-3') Jersey Type is:
+            div #{Jersey_type}
+        div.row 
+            div(class='JerseyAttr mr-3') Jersey Size is: 
+            div #{size}
+        div.row 
+            div(class='JerseyAttr mr-3') Jersey Number is: 
+            div #{Jersey_number}
