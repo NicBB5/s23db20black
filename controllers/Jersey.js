@@ -111,3 +111,14 @@ exports.Jersey_view_one_Page = async function(req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+exports.Jersey_create_Page = function(req,res) {
+    console.log("create view")
+    try {
+        res.render('Jerseycreate', {title: 'Jersey Create'});
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error':'${err}'}`);
+    }
+};
