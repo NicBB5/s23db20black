@@ -134,3 +134,15 @@ exports.Jersey_update_Page = async function(req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+exports.Jersey_delete_page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try {
+        result = await Jersey.findById(req.query.id)
+        res.render('Jerseydelete', {title: 'Jersey Delete', toShow: result});
+    }
+    catch(err) {
+        res.status(500)
+        res.send(`{'error':'${err}'}`);
+    }
+};

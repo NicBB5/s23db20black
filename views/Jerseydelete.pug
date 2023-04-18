@@ -1,0 +1,49 @@
+extends layout 
+
+block content
+    h1 = title 
+
+    if(toShow == null)
+        h2 No instance to delete 
+    else 
+        - let Jerseyid = toShow._id
+        - let Jersey_type = toShow.Jersey_type 
+        - let size = toShow.size 
+        - let Jersey_number = toShow.Jersey_number
+        script let actionid = "#{actionid}" 
+        div
+            div.row
+                div(class='JerseyAttr mr-3') Jersey ID is: 
+                div #{Jerseyid}
+            div.row 
+                div(class='JerseyAttr mr-3') Jersey Type is:
+                div #{Jersey_type}
+            div.row 
+                div(class='JerseyAttr mr-3') Jersey Size is: 
+                div #{size}
+            div.row 
+                div(class='JerseyAttr mr-3') Jersey Number is: 
+                div #{Jersey_number}
+        
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+        function cancel() {
+            window.location.href = '/Jersey'
+        }
+    script.
+        function deleteOnid() {
+            console.log("starting delete")
+
+            fetch(actionid, {
+                method: 'DELETE'
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("Delete succeded")
+                window.location.href='/Jersey'
+            }).catch((error) => {
+                alert("Delete failed" + error)
+            });
+        }
