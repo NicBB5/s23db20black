@@ -14,5 +14,7 @@ module.exports = router; */
 
 /* router.get('/detail', Jersey_controllers.Jersey_view_one_Page); */
 
-router.get('/create', Jersey_controllers.Jersey_create_Page);
+/* router.get('/create', Jersey_controllers.Jersey_create_Page); */
+
+router.get('/update', Jersey_controllers.Jersey_update_Page);
 module.exports = router;

@@ -1,0 +1,42 @@
+extends layout 
+
+block content 
+    h1 = title
+
+    - let Jerseyid = toShow._id 
+    - let Jersey_type = toShow.Jersey_type 
+    - let size = toShow.size
+    - let Jersey_number = toShow.Jersey_number 
+
+    div.row(class='mb-2')
+        div.mr-1 ID is 
+        div#{Jerseyid}
+        - let actionid = "/resource/Jersey/" + Jerseyid  
+
+    form(id='JerseyForm', action= actionid, method="PUT")
+        div.form-group
+            label.JerseyAttr(for='Jersey_type') Jersey type 
+            input#Jersey_type(type='text', name='Jersey_type', value=Jersey_type)
+        div.form-group
+            label.JerseyAttr(for='size') Jersey size 
+            input#size(type='text', name='size', value=size)
+        div.form-group
+            label.JerseyAttr(for='Jersey_number') Jersey number 
+            input#Jersey_number(type='number', name='Jersey_number', value=Jersey_number)
+        input(type="submit")
+
+    script.
+        document.forms['JerseyForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            fetch(event.target.action, {
+                method: 'PUT',
+                body: new URLSearchParams(new FormData(event.target))
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("Save succeded")
+            })x.catch((error) => {
+                alert("Save failed " + error)
+            });
+        });
