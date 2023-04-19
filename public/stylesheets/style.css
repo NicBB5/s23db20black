@@ -8,6 +8,10 @@ a {
 }
 
 .JerseyAttr {
-  background-color: aquamarine;
-  width: 120px;
+  background-color: green;
+  width: 100px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  border: 15px solid green;
+  padding: 5px;
+  margin: 5px;
 }
