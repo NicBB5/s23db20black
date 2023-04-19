@@ -39,7 +39,7 @@ block content
             fetch(actionid, {
                 method: 'DELETE'
             }).then((resp) => {
-                return resp.json();
+                return resp.text();
             }).then((body) => {
                 alert("Delete succeded")
                 window.location.href='/Jersey'
