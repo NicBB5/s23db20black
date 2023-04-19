@@ -72,7 +72,7 @@ exports.Jersey_detail = async function(req, res) {
 };
 
 exports.Jersey_update_put = async function(req, res) {
-    console.log(`update on id ${req.params.id} with body ${JSON.stringqify(req.body)}`)
+    console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`)
     try {
         let toUpdate = await Jersey.findById(req.params.id)
         if(req.body.Jersey_type)
@@ -135,8 +135,8 @@ exports.Jersey_update_Page = async function(req, res) {
     }
 };
 
-exports.Jersey_delete_page = async function(req, res) {
-    console.log("Delete view for id " + req.query.id)
+exports.Jersey_delete_Page = async function(req, res) {
+    console.log("Delete view for id" + req.query.id)
     try {
         result = await Jersey.findById(req.query.id)
         res.render('Jerseydelete', {title: 'Jersey Delete', toShow: result});
