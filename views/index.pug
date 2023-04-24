@@ -1,17 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Interesting Fact: I was born in Arizona
-  button(type="button", class="btn btn-secondary" onclick="doReduce()") Reduce 
-  div(id="reduce")
-
-  script. 
-    var count = 20
-    var change = -1
-
-    function doReduce() {
-      change += count
-      change -= 1
-      document.getElementById("reduce").innerHTML = "Count " + count + " with change " + change
-    }
+  if (!user)
+    a(href="/login") Login
+    br
+    a(href="/register") Register 
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/Jersey") Take me to Jersey 
+    br
+    a(href="/logout") Logout
