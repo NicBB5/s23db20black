@@ -4,7 +4,7 @@ var passport = require('passport');
 var Account = require('../models/account');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render('index', { title: 'Jersey App', user : req.user });
 });
 
@@ -14,23 +14,27 @@ router.get('/register', function(req, res) {
 
 router.post('/register', function(req, res) {
   Account.findOne({ username : req.body.username})
-    .then(user => {
-      if(user) {
-        return res.render('register', { title: 'Registration', message: 'Existing User', account : req.body.username});
+    .then (function (user) {
+      if(user !=null ){
+        console.log("exists " + req.body.username)
+        return res.render('register', { title: 'Registration', message: 'Existing User', account : req.body.username})
       }
-      let newAccount = new Account({ username : req.body.username });
-      Account.register(newAccount, req.body.password)
-        .then(user => {
-          console.log('Success, redirect');
-          res.redirect('/');
-        })
-        .catch(err => {
-          return res.render('register', { title : 'Registration', message: 'access error', account : req.body.username});
-        });
+      let newAccount = new Account ({ username: req.body.username });
+      Account.register(newAccount, req.body.password, function(err, user){
+        if (err) {
+          console.log("db creation issue " + err)
+          return res.render('register', { title: 'Registration', message: 'access error', account : req.body.username })
+        }
+        if (!user) {
+          return res.render('register', { title: 'Registration', message: 'access error', account : req.body.username})
+        }
+      })
+      console.log('Success', redirect);
+      res.redirect('/');
     })
-    .catch(err => {
-      return res.render('register', { title: 'Registration', message: 'Registration error', account : req.body.username});
-    });
+    .catch (function (err) {
+      return res.render('register', { title: 'Registration', message: 'Registration error', account : req.body.username })
+    })
 });
     
 
