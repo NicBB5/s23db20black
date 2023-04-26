@@ -5,11 +5,23 @@ block content
 
   div(class="container-fluid")
     div(class="row m-1")
+      - let place = `dispatch(\"/Jersey/create?")`
+      button.btn(class="btn-primary ml-1", onclick=place) Create
+
+
+  div(class="container-fluid")
+    div(class="row m-1")
       - let result = results
         each item in result
           - let destination = `dispatch(\"/Jersey/update?id=${item._id}\")`
+          - let destination2 = `dispatch(\"/Jersey/detail?id=${item._id}\")`
+          - let destination3 = `dispatch(\"/Jersey/delete?id=${item._id}\")`
           div(class="col-sm-2", class="m-1") Item #{item.Jersey_type} #{item.size} #{item.Jersey_number}
             button.btn(class="btn-primary ml-1", onclick=destination) Update
+            button.btn(class="btn-primary ml-1", onclick=destination2) Detail
+            button.btn(class="btn-primary ml-1", onclick=destination3) Delete
+          
+
 
   script.
     function dispatch(path) {
